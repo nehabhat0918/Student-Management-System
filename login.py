@@ -23,7 +23,7 @@ loginFrame = Frame(
 loginFrame.place(x=850, y=120)
 
 # TITLE
-Label(loginFrame, text="LOGIN HERE",fg= "MistyRose4", font=("Times New Roman", 24, "bold"), bg="white").place(x=80, y=30)
+Label(loginFrame, text="LOGIN HERE",fg= "#002147", font=("Times New Roman", 24, "bold"), bg="white").place(x=80, y=30)
 
 # USERNAME
 Label(loginFrame, text="Username:",fg= "DodgerBlue4", font=("Cascadia code", 14), bg="white").place(x=40, y=120)
