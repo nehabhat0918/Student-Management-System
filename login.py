@@ -1,5 +1,10 @@
 from tkinter import *
+from tkinter import messagebox
 from PIL import ImageTk, Image
+
+#Checks if the username and password entered is correct or not
+# def login() : 
+#     if 
 
 window = Tk()
 window.geometry("1280x700+0+0")
@@ -26,12 +31,12 @@ loginFrame.place(x=850, y=120)
 Label(loginFrame, text="LOGIN HERE",fg= "MistyRose4", font=("Times New Roman", 24, "bold"), bg="white").place(x=80, y=30)
 
 # USERNAME
-Label(loginFrame, text="Username:",fg= "DodgerBlue4", font=("Cascadia code", 14), bg="white").place(x=40, y=120)
-Entry(loginFrame, font=("Arial", 14), width=25).place(x=40, y=150)
+username_label=Label(loginFrame, text="Username:",fg= "DodgerBlue4", font=("Cascadia code", 14), bg="white").place(x=40, y=120)
+usename_entry=Entry(loginFrame, font=("Arial", 14), width=25).place(x=40, y=150)
 
 # PASSWORD
-Label(loginFrame, text="Password:",fg= "DodgerBlue4", font=("Cascadia code", 14), bg="white").place(x=40, y=220)
-Entry(loginFrame, font=("Arial", 14), width=25, show="*").place(x=40, y=250)
+password_label=Label(loginFrame, text="Password:",fg= "DodgerBlue4", font=("Cascadia code", 14), bg="white").place(x=40, y=220)
+password_entry=Entry(loginFrame, font=("Arial", 14), width=25, show="*").place(x=40, y=250)
 
 # LOGIN BUTTON
 Button(loginFrame, text="Login", font=("Arial", 16, "bold"), width=12,
