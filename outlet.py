@@ -6,26 +6,25 @@ from tkinter import Frame
 from tkinter import Scrollbar,HORIZONTAL,VERTICAL,BOTTOM,RIGHT,X,Y
 
 
-count=0
-text=''
+count = 0
+text = ''
+s = 'Student Management System'
 
 def slider():
-    global text,count
-    if count<len(s):
-
-        text=text+s[count]
+    global text, count
+    if count < len(s):
+        text = text + s[count]
         sliderLabel.config(text=text)
-        count+=1
-        sliderLabel.after(300,slider)
+        count += 1
+        sliderLabel.after(300, slider)
 
 def clock():
     date=time.strftime("%d/%m/%Y")
     current_time=time.strftime("%H:%M:%S")
     datetimeLabel.config(text=f" Date:{date}\nTime: {current_time}")
     datetimeLabel.after(1000,clock)
-                         
 
-window=ThemedTk(theme="scidblue")
+window=ThemedTk(theme="breeze")
 
 
 #mobile=tk.StringVar()
@@ -37,18 +36,16 @@ mobile=tk.StringVar()
 datetimeLabel=tk.Label(window,text='hello',font=('times new roman',18,'bold'))
 datetimeLabel.place(x=5,y=5)
 clock()
-s='Student Management System'
 sliderLabel=tk.Label(window,text=s,font=('arial',28,'bold'),width=30)
 sliderLabel.place(x=200,y=0)
 slider()
 
-#window=ThemedTk(theme="scidblue")
 
 connect_Button=ttk.Button(window,text='Connect database')
 connect_Button.place(x=1350,y=20)
 
 leftFrame=Frame(window,bg='midnightblue')
-leftFrame.place(x=58,y=80,width=300,height=600)
+leftFrame.place(x=30,y=80,width=300,height=600)
 
 logo_image=tk.PhotoImage(file="std.png")
 logo_Label=tk.Label(leftFrame,image=logo_image)
@@ -78,31 +75,44 @@ exit_student_Button.grid(row=14,column=2,pady=20)
 rightFrame=Frame(window,bd=10,bg='white',padx=-20)
 rightFrame.place(x=350,y=80,height=600)
 
-tableFrame=Frame(rightFrame,bg='white')
-tableFrame.pack(fill=tk.BOTH,expand=1)
+tableFrame = Frame(rightFrame, bg="white")
+tableFrame.pack(fill=tk.BOTH, expand=True)
 
+scrollBarY = Scrollbar(tableFrame, orient=VERTICAL)
 
-scrollBarX=Scrollbar(tableFrame,orient=HORIZONTAL)
-scrollBarY=Scrollbar(tableFrame,orient=VERTICAL)
+studentTable = ttk.Treeview(
+    tableFrame,
+    columns=("Id","Name","D.O.B","Gender","Mobile No.","Email"),
+    show="headings",
+    yscrollcommand=scrollBarY.set
+)
 
-studentTable=ttk.Treeview(tableFrame,columns=('Id','Name','D.O.B','Gender','Mobile No.','Email','Address'))
-studentTable.configure(xscrollcommand=scrollBarX.set,yscrollcommand=scrollBarY.set,show='headings')
-
-scrollBarX.config(command=studentTable.xview)
 scrollBarY.config(command=studentTable.yview)
 
-scrollBarX.pack(side=BOTTOM,fill=tk.X)
-scrollBarY.pack(side=RIGHT,fill=tk.Y)
+scrollBarY.pack(side=RIGHT, fill=Y)
+studentTable.pack(fill=tk.BOTH, expand=True)
 
-studentTable.pack(side=tk.LEFT,fill=tk.BOTH,expand=1)
+studentTable.pack(fill=tk.BOTH, expand=1)
 
 studentTable.heading('Id',text='Id')
 studentTable.heading('Name',text='Name')
 studentTable.heading('D.O.B',text='D.O.B')
 studentTable.heading('Gender',text='Gender')
 studentTable.heading('Mobile No.',text='Mobile No.')
-studentTable.heading('Email',text='Email Address')
-studentTable.heading('Address',text='Address')
+studentTable.heading('Email',text='Email Id')
+
+studentTable.column('Id', width=100, anchor="center")
+studentTable.column('Name', width=120, anchor="center")
+studentTable.column('D.O.B', width=70, anchor="center")
+studentTable.column('Gender', width=150, anchor="center")
+studentTable.column('Mobile No.', width=200, anchor="center")
+studentTable.column('Email', width=200, anchor="center")
+
+#dummy details
+for i in range(10):
+    studentTable.insert("", "end",
+                        values=(i, f"Name{i}", "01/01/2000", "Male",
+                                "9876543210", f"user{i}@mail.com", "Some Address"))
 
 studentTable.config(show='headings')
 
