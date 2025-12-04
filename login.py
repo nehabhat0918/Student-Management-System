@@ -1,6 +1,7 @@
 from tkinter import *
 from tkinter import messagebox
 from PIL import ImageTk, Image
+import outlet
 
 #Login button functionality
 def login(event=None):
@@ -11,12 +12,10 @@ def login(event=None):
         messagebox.showerror("Error", "Please enter both username and password")
         return
 
-    elif user == "Neha" and pwd == "6767":
+    elif user == "Admin" and pwd == "6767":
         messagebox.showinfo("Success", f"Welcome, {user}!")
-    elif user == "Krishnaveni" and pwd == "4567":
-        messagebox.showinfo("Success", f"Welcome, {user}!")
-    elif user == "Likitha" and pwd == "6789":
-        messagebox.showinfo("Success", f"Welcome, {user}!")
+        window.destroy()
+        outlet.main()
     else:
         messagebox.showerror("Error", "Please enter correct credentials")
 
