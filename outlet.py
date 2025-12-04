@@ -5,44 +5,74 @@ from ttkthemes import ThemedTk
 from tkinter import Frame
 from tkinter import Scrollbar,HORIZONTAL,VERTICAL,BOTTOM,RIGHT,X,Y
 
+import tkinter as tk
+import time
+from tkinter import ttk
+from ttkthemes import ThemedTk
 
 count = 0
-text = ''
-s = 'Student Management System'
+text = ""
+s = "Student Management System"
 
+# Smooth slider animation
 def slider():
     global text, count
-    if count < len(s):
-        text = text + s[count]
-        sliderLabel.config(text=text)
-        count += 1
-        sliderLabel.after(300, slider)
 
+    # Reset when completed
+    if count >= len(s):
+        text = ""
+        count = 0
+        sliderLabel.config(text="")
+        sliderLabel.after(800, slider)   # Pause before restarting
+        return
+
+    # Add one character at a time
+    text += s[count]
+    sliderLabel.config(text=text)
+
+    count += 1
+
+    sliderLabel.after(150, slider)
+
+# Digital clock
 def clock():
-    date=time.strftime("%d/%m/%Y")
-    current_time=time.strftime("%H:%M:%S")
-    datetimeLabel.config(text=f" Date:{date}\nTime: {current_time}")
-    datetimeLabel.after(1000,clock)
+    date = time.strftime("%d/%m/%Y")
+    current_time = time.strftime("%H:%M:%S")
+    datetimeLabel.config(text=f"Date: {date}\nTime: {current_time}")
+    datetimeLabel.after(1000, clock)
 
-window=ThemedTk(theme="breeze")
-
-
-#mobile=tk.StringVar()
-window.geometry('1174x680+50+20')
-
-
+# Window
+window = ThemedTk(theme="breeze")
+window.geometry("1174x680+50+20")
 window.title("Student Management System")
-mobile=tk.StringVar()
-datetimeLabel=tk.Label(window,text='hello',font=('times new roman',18,'bold'))
-datetimeLabel.place(x=5,y=5)
+window.configure(bg="#dcdcdc")   # Dark blue background
+
+# Date & Time Label
+datetimeLabel = tk.Label(
+    window,
+    text="",
+    font=('Times New Roman', 18, 'bold'),
+    bg="#dcdcdc",
+    fg="#0F172A"
+)
+datetimeLabel.place(x=28, y=5)
 clock()
-sliderLabel=tk.Label(window,text=s,font=('arial',28,'bold'),width=30)
-sliderLabel.place(x=200,y=0)
+
+# Slider Label
+sliderLabel = tk.Label(
+    window,
+    text="",
+    fg="#0F172A",
+    bg="#dcdcdc",
+    font=("Times New Roman", 28, "bold"),
+    width=30
+)
+sliderLabel.place(x=350, y=10)
+
 slider()
 
-
 connect_Button=ttk.Button(window,text='Connect database')
-connect_Button.place(x=1350,y=20)
+connect_Button.place(x=1100,y=15)
 
 leftFrame=Frame(window,bg='midnightblue')
 leftFrame.place(x=30,y=80,width=300,height=600)
@@ -109,10 +139,10 @@ studentTable.column('Mobile No.', width=200, anchor="center")
 studentTable.column('Email', width=200, anchor="center")
 
 #dummy details
-for i in range(10):
+for i in range(1,10):
     studentTable.insert("", "end",
                         values=(i, f"Name{i}", "01/01/2000", "Male",
-                                "9876543210", f"user{i}@mail.com", "Some Address"))
+                                "9876543210", f"user{i}@mail.com"))
 
 studentTable.config(show='headings')
 
