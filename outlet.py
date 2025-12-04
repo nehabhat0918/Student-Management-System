@@ -32,13 +32,13 @@ def main():
     window.geometry('1174x680+50+20')
 
 
-    window.title("Student Management System")
+    window.title(" Student Management System ")
     mobile=tk.StringVar()
     datetimeLabel=tk.Label(window,text='hello',font=('times new roman',18,'bold'))
     datetimeLabel.place(x=5,y=5)
     clock()
-    sliderLabel=tk.Label(window,text=s,font=('arial',28,'bold'),width=30)
-    sliderLabel.place(x=200,y=0)
+    sliderLabel=tk.Label(window,text=s,font=('Britannic Bold',28),width=30)
+    sliderLabel.place(x=400,y=8)
     slider()
 
 
@@ -51,19 +51,20 @@ def main():
     logo_image=tk.PhotoImage(file="std.png")
     logo_Label=tk.Label(leftFrame,image=logo_image)
     logo_Label.grid(row=0,column=0)
-    ##adding functionality
-    ###############STARTS###################
+
+
+    #adding functionality
     import csv, os
     from tkinter import messagebox
 
-    FILENAME = "students.csv"
+    FILENAME ="students.csv"
 
     def load_data():
         if os.path.exists(FILENAME):
             with open(FILENAME, newline="", encoding="utf-8") as f:
                 reader = csv.reader(f)
                 for row in reader:
-                    studentTable.insert("", "end", values=row)
+                    studentTable.insert("","end", values=row)
 
     def save_data():
         with open(FILENAME, "w", newline="", encoding="utf-8") as f:
@@ -216,7 +217,7 @@ def main():
         if confirm:
             window.destroy()
 
-    ##############################ENDS#########################
+    #########################ENDS#########################
     delete_student_Button=tk.Button(leftFrame,text='Delete Student',width=25,command=delete_student)
     delete_student_Button.grid(row=6,column=2,pady=20)
 
@@ -227,14 +228,11 @@ def main():
     search_student_Button=tk.Button(leftFrame,text='Search Student',width=25,command=search_student)
     search_student_Button.grid(row=4,column=2,pady=20)
 
-
-
     update_student_Button=tk.Button(leftFrame,text='Update Student',width=25,command=update_student)
     update_student_Button.grid(row=8,column=2,pady=20)
 
     reset_Button=tk.Button(leftFrame,text='Reset',width=25,command=reset_data)
     reset_Button.grid(row=10,column=2,pady=20)
-
 
     exit_student_Button=tk.Button(leftFrame,text='Exit',width=25,command=exit_app)
     exit_student_Button.grid(row=12,column=2,pady=20)
@@ -257,25 +255,23 @@ def main():
     scrollBarY.config(command=studentTable.yview)
 
     scrollBarY.pack(side=RIGHT, fill=Y)
-    studentTable.pack(fill=tk.BOTH, expand=True)
+    studentTable.pack(fill=tk.BOTH,expand=True)
 
-    studentTable.pack(fill=tk.BOTH, expand=1)
+    studentTable.pack(fill=tk.BOTH,expand=1)
 
-    studentTable.heading('Id',text='Id')
-    studentTable.heading('Name',text='Name')
-    studentTable.heading('D.O.B',text='D.O.B')
-    studentTable.heading('Gender',text='Gender')
-    studentTable.heading('Mobile No.',text='Mobile No.')
-    studentTable.heading('Email',text='Email Id')
+    studentTable.heading('Id', text='Id')
+    studentTable.heading('Name', text='Name')
+    studentTable.heading('D.O.B', text='D.O.B')
+    studentTable.heading('Gender', text='Gender')
+    studentTable.heading('Mobile No.', text='Mobile No.')
+    studentTable.heading('Email', text='Email Id')
 
-    studentTable.column('Id', width=100, anchor="center")
-    studentTable.column('Name', width=120, anchor="center")
-    studentTable.column('D.O.B', width=70, anchor="center")
-    studentTable.column('Gender', width=150, anchor="center")
-    studentTable.column('Mobile No.', width=200, anchor="center")
-    studentTable.column('Email', width=200, anchor="center")
-
-
+    studentTable.column('Id', width= 100, anchor="center")
+    studentTable.column('Name', width= 120, anchor="center")
+    studentTable.column('D.O.B', width= 70, anchor="center")
+    studentTable.column('Gender', width= 150, anchor="center")
+    studentTable.column('Mobile No.', width= 200, anchor="center")
+    studentTable.column('Email', width= 200, anchor="center")
 
 
     studentTable.config(show='headings')
