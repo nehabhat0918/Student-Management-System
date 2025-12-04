@@ -2,6 +2,7 @@ from tkinter import *
 from tkinter import messagebox
 from PIL import ImageTk, Image
 
+#Login button functionality
 def login(event=None):
     user = usernameEntry.get().strip()
     pwd = passwordEntry.get().strip()
@@ -10,7 +11,11 @@ def login(event=None):
         messagebox.showerror("Error", "Please enter both username and password")
         return
 
-    if user == "Neha" and pwd == "1234":
+    elif user == "Neha" and pwd == "6767":
+        messagebox.showinfo("Success", f"Welcome, {user}!")
+    elif user == "Krishnaveni" and pwd == "4567":
+        messagebox.showinfo("Success", f"Welcome, {user}!")
+    elif user == "Likitha" and pwd == "6789":
         messagebox.showinfo("Success", f"Welcome, {user}!")
     else:
         messagebox.showerror("Error", "Please enter correct credentials")
@@ -39,20 +44,20 @@ loginFrame = Frame(
 )
 loginFrame.place(x=850, y=120)
 
-# TITLE
+#Title
 Label(loginFrame, text="LOGIN HERE", fg="MistyRose4", font=("Times New Roman", 24, "bold"), bg="white").place(x=80, y=30)
 
-# USERNAME
+# Username
 Label(loginFrame, text="Username:", fg="DodgerBlue4", font=("Cascadia Code", 14), bg="white").place(x=40, y=120)
 usernameEntry = Entry(loginFrame, font=("Arial", 14), width=25)
 usernameEntry.place(x=40, y=150)
 
-# PASSWORD
+# Password
 Label(loginFrame, text="Password:", fg="DodgerBlue4", font=("Cascadia Code", 14), bg="white").place(x=40, y=220)
 passwordEntry = Entry(loginFrame, font=("Arial", 14), width=25, show="*")
 passwordEntry.place(x=40, y=250)
 
-# LOGIN BUTTON
+#Login Button
 loginButton = Button(loginFrame, text="Login", font=("Arial", 16, "bold"), width=12,
        bg="#4a90e2", fg="white", relief=FLAT, cursor='hand2', command=login)
 loginButton.place(x=110, y=330)
