@@ -8,10 +8,10 @@ FILENAME = "students.csv"
 S = "Student Management System"
 
 
-# ---------------------- LOGIN WINDOW ----------------------
+#LOGIN WINDOW
 class LoginDialog(wx.Dialog):
-    def _init_(self, parent):
-        super()._init_(parent, title="Login", size=(820, 480))
+    def __init__(self, parent):
+        super().__init__(parent, title="Login", size=(820, 480))
         panel = wx.Panel(self)
         sizer = wx.BoxSizer(wx.VERTICAL)
 
@@ -22,15 +22,28 @@ class LoginDialog(wx.Dialog):
         except:
             pass
 
-        # Username
-        sizer.Add(wx.StaticText(panel, label="Username:"), 0, wx.LEFT | wx.TOP, 12)
-        self.user_txt = wx.TextCtrl(panel)
-        sizer.Add(self.user_txt, 0, wx.EXPAND | wx.ALL, 12)
+       # Username (centered)
+        sizer.Add(wx.StaticText(panel, label="Username:"), 0, wx.ALIGN_CENTER | wx.TOP, 12)
 
-        # Password
-        sizer.Add(wx.StaticText(panel, label="Password:"), 0, wx.LEFT, 12)
+        user_sizer = wx.BoxSizer(wx.HORIZONTAL)
+        self.user_txt = wx.TextCtrl(panel)
+        self.user_txt.SetMinSize((250, -1))   # width control
+        user_sizer.Add(self.user_txt, 0, wx.ALIGN_CENTER)
+
+        sizer.Add(user_sizer, 0, wx.ALIGN_CENTER | wx.ALL, 8)
+
+
+        # Password (centered)
+        sizer.Add(wx.StaticText(panel, label="Password:"), 0, wx.ALIGN_CENTER | wx.TOP, 12)
+
+        pwd_sizer = wx.BoxSizer(wx.HORIZONTAL)
         self.pwd_txt = wx.TextCtrl(panel, style=wx.TE_PASSWORD)
-        sizer.Add(self.pwd_txt, 0, wx.EXPAND | wx.ALL, 12)
+        self.pwd_txt.SetMinSize((250, -1))
+        pwd_sizer.Add(self.pwd_txt, 0, wx.ALIGN_CENTER)
+
+        sizer.Add(pwd_sizer, 0, wx.ALIGN_CENTER | wx.ALL, 8)
+
+
 
         # Buttons
         btn_sizer = wx.StdDialogButtonSizer()
@@ -54,10 +67,10 @@ class LoginDialog(wx.Dialog):
             wx.MessageBox("Invalid credentials", "Error", wx.ICON_ERROR)
 
 
-# ---------------------- ADD / UPDATE STUDENT WINDOW ----------------------
+# ADD / UPDATE STUDENT WINDOW
 class StudentDialog(wx.Dialog):
-    def _init_(self, parent, title="Add Student", data=None):
-        super()._init_(parent, title=title, size=(550, 380))
+    def __init__(self, parent, title="Add Student", data=None):
+        super().__init__(parent, title=title, size=(550, 380))
         panel = wx.Panel(self)
 
         main_sizer = wx.BoxSizer(wx.VERTICAL)
@@ -97,3 +110,12 @@ class StudentDialog(wx.Dialog):
 
         panel.SetSizer(main_sizer)
         self.Layout()
+
+    def get_values(self):
+        return [
+            self.entries["Name"].GetValue(),
+            self.entries["D.O.B"].GetValue(),
+            self.entries["Gender"].GetValue(),
+            self.entries["Mobile"].GetValue(),
+            self.entries["Email"].GetValue(),
+        ]
