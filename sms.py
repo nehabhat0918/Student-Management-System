@@ -120,7 +120,6 @@ class StudentDialog(wx.Dialog):
             self.entries["Mobile"].GetValue(),
             self.entries["Email"].GetValue(),
         ]
-<<<<<<< HEAD:new.py
 
 
 # MAIN DASHBOARD WINDOW
@@ -318,5 +317,3 @@ class MyApp(wx.App):
 if __name__ == "__main__":
     app = MyApp(False)
     app.MainLoop()
-=======
->>>>>>> 90d54f6b26894f80a3b226dd2b670a71b259becf:sms.py
